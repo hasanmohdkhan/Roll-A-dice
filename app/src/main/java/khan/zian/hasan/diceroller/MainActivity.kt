@@ -9,6 +9,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var result: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,14 +21,13 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener {
              diceRoll()
         }
+        result = findViewById(R.id.img_roll_dice_number)
     }
 
     private fun diceRoll() {
         mediaPlayer = MediaPlayer.create(this, R.raw.dice_roll_sound)
 
-
         val randomInt = Random().nextInt(6) + 1
-        val result: ImageView = findViewById(R.id.img_roll_dice_number)
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-
         mediaPlayer?.start()
         result.setImageResource(drawableResource)
 
